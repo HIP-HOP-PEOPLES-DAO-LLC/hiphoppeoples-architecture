@@ -20,37 +20,62 @@ It exists so that participants, partners, funders, and auditors can understand *
 |---|---|
 | [`docs/ecosystem-routing-map.md`](docs/ecosystem-routing-map.md) | How information flows across our 5-layer stack (GitLab → GitHub → website → DAO → chain) |
 | [`docs/freedom-notes-overview.md`](docs/freedom-notes-overview.md) | What Freedom Notes™ are, what they are not, and how they work |
+| [`docs/rd-compliance-summary.md`](docs/rd-compliance-summary.md) | How we maintain R&D tax credit compliance while avoiding arts/humanities exclusions |
+| [`docs/ccos-overview.md`](docs/ccos-overview.md) | Cultural Compliance Operating System (CCOS) architecture overview |
 
 ---
 
-## What's NOT Here
+## Related Repositories
 
-This repo contains **patterns, not records**.
+### Public Repositories (GitHub)
+- **[hiphoppeoples-architecture](https://github.com/HIP-HOP-PEOPLES-DAO-LLC/hiphoppeoples-architecture)** (this repo) — Governance, transparency, and ecosystem architecture
+- - **[HHHI-Workforce-System](https://github.com/HIP-HOP-PEOPLES-DAO-LLC/HHHI-Workforce-System)** — Workforce development SOPs, ApprenticeshipNC documentation, R&D compliance framework
+ 
+  - ### Private Repositories (GitLab)
+  - - **rd-evidence-ledger** — R&D documentation, experiments, evidence index
+    - - **freedom-notes-ledger** — Freedom Notes allocations, internal policies, enforcement
+      - - **field-log / crisis-capture** — Field operations, incident documentation, case management
+       
+        - ---
 
-You will not find here:
+        ## What's NOT Here
 
-- Participant data, case notes, or personal information
-- Freedom Notes balances or individual allocations
-- Incident reports, enforcement actions, or dispute details
-- Internal policies, manuals, or operational controls
+        This repo contains **patterns, not records**.
 
-That information lives in private systems (GitLab) with appropriate access controls.
+        You will not find here:
 
----
+        - Participant data, case notes, or personal information
+        - - Freedom Notes balances or individual allocations
+          - - Incident reports, enforcement actions, or dispute details
+            - - Internal policies, manuals, or operational controls
+             
+              - That information lives in private systems (GitLab) with appropriate access controls.
+             
+              - ---
 
-## The Ecosystem
+              ## The Ecosystem
 
-- **hiphoppeoples.com** — Programs, onboarding, and participation
-- **hiphoppeoples.dao** — Governance visibility, proposals, and decision summaries
-- **This repo** — Architecture and public documentation
-- **GitLab (private)** — Operational records, compliance evidence, and internal governance
+              - **hiphoppeoples.com** — Programs, onboarding, and participation
+              - - **hiphoppeoples.dao** — Governance visibility, proposals, and decision summaries
+                - - **GitHub (public)** — Architecture, transparency, and workforce documentation
+                  - - **GitLab (private)** — Operational records, compliance evidence, and internal governance
+                   
+                    - ---
 
----
+                    ## For Partners & Auditors
 
-## License
+                    If you're a **fiscal sponsor, funder, or auditor**, the documentation you need is organized as follows:
 
-[MIT](LICENSE)
+                    - **Governance & Transparency:** This repo
+                    - - **Workforce Programs:** [HHHI-Workforce-System](https://github.com/HIP-HOP-PEOPLES-DAO-LLC/HHHI-Workforce-System) repo
+                      - - **Financial & Compliance:** Request access to specific GitLab repos (contact: affishaulworldwide@gmail.com)
+                       
+                        - ---
 
----
+                        ## License
 
-*Structure is how spirit survives contact with time.*
+                        [MIT](LICENSE)
+
+                        ---
+
+                        *Structure is how spirit survives contact with time.*
