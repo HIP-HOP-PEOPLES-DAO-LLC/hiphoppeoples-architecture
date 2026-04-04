@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mid-Atlantic Surety & Public Trust | Pretrial Risk Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06080C;--surface:#0D1017;--card:#111820;--border:#1A2030;--gold:#C9A84C;--gold-dim:rgba(201,168,76,.15);--blue:#4A7BF7;--blue-dim:rgba(74,123,247,.12);--green:#34D399;--green-dim:rgba(52,211,153,.12);--text:#E8E6E1;--muted:#6B6D7E;--purple:#AB47BC;--purple-dim:rgba(171,71,188,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+a{color:var(--gold);text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,8,12,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
+.nav-logo{font-size:15px;font-weight:800;letter-spacing:-.3px}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:12px;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--gold);color:var(--bg);padding:8px 16px;border-radius:8px;font-weight:700;font-size:11px;letter-spacing:.3px}
+.hero{padding:140px 0 60px;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(201,168,76,.04),transparent 70%)}
+.hero-badge{display:inline-block;padding:5px 16px;background:var(--gold-dim);border:1px solid rgba(201,168,76,.2);border-radius:100px;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero h1{font-size:clamp(26px,5vw,44px);font-weight:900;line-height:1.1;letter-spacing:-1px;max-width:680px;margin:0 auto 16px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:clamp(13px,1.8vw,16px);color:var(--muted);max-width:560px;margin:0 auto 28px;line-height:1.6}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 26px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:transform .2s,box-shadow .3s;display:inline-block;text-align:center}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(135deg,#C9A84C,#A8872A);color:var(--bg);box-shadow:0 4px 24px rgba(201,168,76,.3)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:12px;overflow:hidden;margin-bottom:60px}
+.stat{background:var(--card);padding:22px 14px;text-align:center}
+.stat-num{font-size:24px;font-weight:900;color:var(--gold)}
+.stat-label{font-size:10px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+section{padding:50px 0}
+.sl{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.st{font-size:clamp(20px,3.2vw,30px);font-weight:900;letter-spacing:-.5px;margin-bottom:10px}
+.sd{color:var(--muted);font-size:14px;line-height:1.6;max-width:580px;margin-bottom:28px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .3s}
+.card:hover{border-color:var(--gold)}
+.card-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:12px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:5px}
+.card h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.card p{font-size:11px;color:var(--muted);line-height:1.5}
+.phase{position:relative}
+.phase::before{content:attr(data-phase);position:absolute;top:10px;right:12px;font-size:9px;font-weight:800;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.phase h3{padding-right:60px}
+.trust-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;margin:28px 0}
+.trust-item{text-align:center}
+.trust-item .num{font-size:20px;font-weight:900;color:var(--green)}
+.trust-item .label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.disclosure{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;margin-top:24px}
+.disclosure h4{font-size:11px;font-weight:700;margin-bottom:5px;color:var(--gold)}
+.disclosure p{font-size:10px;color:var(--muted);line-height:1.6}
+.bail-back{border-left:3px solid var(--gold);padding-left:20px;margin:16px 0}
+.bail-back h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.bail-back p{font-size:11px;color:var(--muted);line-height:1.5}
+.cta-section{text-align:center;padding:60px 0 50px}
+.cta-section h2{font-size:clamp(22px,3.5vw,34px);font-weight:900;margin-bottom:10px}
+.cta-section p{color:var(--muted);margin-bottom:24px;font-size:14px}
+footer{border-top:1px solid var(--border);padding:28px 0;text-align:center}
+footer p{font-size:10px;color:var(--muted);line-height:1.6}
+footer .npi{font-size:8px;color:rgba(107,109,126,.5);margin-top:5px;letter-spacing:.5px}
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.grid3,.grid2{grid-template-columns:1fr}.nav-links a:not(.nav-cta){display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><span>MASPT</span> | Mid-Atlantic Surety</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#finance">Finance</a>
+      <a href="#bailback">Bail Back</a>
+      <a href="#performance">Performance</a>
+      <a href="#cta" class="nav-cta">Get Approved</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+  <div class="hero-badge">Institutional Pretrial Risk Management</div>
+  <h1>Pretrial Release Supported by <em>Active Compliance Systems</em></h1>
+  <p>We facilitate bail bond financing and support defendants through a structured compliance framework designed to improve court appearance rates and reduce failure-to-appear risk.</p>
+  <p style="font-size:11px;color:var(--muted);margin-top:-16px;margin-bottom:28px">All bonds are executed through licensed agents and surety carriers. MASPT provides administrative coordination, compliance support, and case monitoring systems.</p>
+  <div class="hero-btns">
+    <a href="#cta" class="btn btn-gold">Start Case Review</a>
+    <a href="tel:9194383718" class="btn btn-outline">Speak with a Case Manager</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">499+</div><div class="stat-label">Bonds Facilitated</div></div>
+  <div class="stat"><div class="stat-num">Multi-Year</div><div class="stat-label">Operational Experience</div></div>
+  <div class="stat"><div class="stat-num">3-Phase</div><div class="stat-label">Compliance Process</div></div>
+  <div class="stat"><div class="stat-num">NC &middot; SC &middot; VA</div><div class="stat-label">Service Coverage</div></div>
+</div>
+
+<section id="services">
+  <div class="sl">What We Do</div>
+  <div class="st">Comprehensive Pretrial Risk Management</div>
+  <div class="sd">Four integrated service layers that support defendants, attorneys, surety carriers, and the court system.</div>
+  <div class="grid4">
+    <div class="card">
+      <div class="card-icon" style="background:var(--gold-dim);color:var(--gold)">$</div>
+      <h3>Bail Bond Financing</h3>
+      <p>Structured premium financing tied to compliance performance with transparent fee disclosure.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:var(--blue-dim);color:var(--blue)">&#9670;</div>
+      <h3>Risk Assessment</h3>
+      <p>Structured compliance and engagement system (CCOS&trade;) using dynamic behavioral data, not static credit scores.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:var(--green-dim);color:var(--green)">&#10003;</div>
+      <h3>Compliance Support</h3>
+      <p>Court date reminders, check-in coordination, and structured communication designed to support court appearance rates.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:var(--purple-dim);color:var(--purple)">&#9881;</div>
+      <h3>Case Monitoring</h3>
+      <p>Continuous oversight with early intervention protocols that actively support compliance outcomes throughout case duration.</p>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="sl">Structured Compliance System</div>
+  <div class="st">Our Three-Phase Process</div>
+  <div class="sd">Every case follows a documented, auditable pipeline designed to support court success.</div>
+  <div class="grid3">
+    <div class="card phase" data-phase="Phase 1">
+      <h3>Intake &amp; Bond Execution</h3>
+      <p>Case submission, structured risk evaluation, bond placement through licensed carrier with full documentation.</p>
+    </div>
+    <div class="card phase" data-phase="Phase 2">
+      <h3>Active Compliance Support</h3>
+      <p>Court reminders deployed, direct communication established, behavioral engagement through Structured Social Compliance Network.</p>
+    </div>
+    <div class="card phase" data-phase="Phase 3">
+      <h3>Case Completion</h3>
+      <p>Court success documented. Risk closure executed. Outcome data captured for institutional reporting and continuous improvement.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sl">Who We Serve</div>
+  <div class="st">Built for Every Stakeholder</div>
+  <div class="grid2">
+    <div class="card"><h4>Individuals &amp; Families</h4><p>Fast release processing, premium financing, and structured guidance through the legal process with dignity and support.</p></div>
+    <div class="card"><h4>Attorneys</h4><p>Reliable clients supported by documented compliance systems that reduce failure-to-appear risk and provide oversight records.</p></div>
+    <div class="card"><h4>Surety Carriers</h4><p>Structured behavioral oversight designed to lower loss exposure through data-driven engagement and early intervention systems.</p></div>
+    <div class="card"><h4>Bail Agents</h4><p>You bring the clients. We handle financing and compliance infrastructure. You receive the full premium payment directly.</p></div>
+  </div>
+</section>
+
+<section id="finance">
+  <div class="sl">Bail Bond Finance</div>
+  <div class="st">Structured Bail Financing with Compliance Support</div>
+  <div class="sd">We finance the bail bond premium (not the full bail amount) while supporting compliance through structured communication, monitoring, and engagement systems.</div>
+  <div class="grid3">
+    <div class="card" style="text-align:center">
+      <div style="font-size:22px;margin-bottom:8px">&#128202;</div>
+      <h4>Active Compliance Tracking</h4>
+      <p>Designed to reduce failure-to-appear rates through continuous monitoring and structured engagement.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:22px;margin-bottom:8px">&#128279;</div>
+      <h4>Social Compliance Network</h4>
+      <p>Tiered community accountability model providing multi-layer support and oversight during the pretrial period.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:22px;margin-bottom:8px">&#9888;</div>
+      <h4>Early Intervention</h4>
+      <p>Proactive measures designed to address risk indicators before a failure-to-appear event occurs.</p>
+    </div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item"><div class="num">499+</div><div class="label">Bonds Facilitated</div></div>
+    <div class="trust-item"><div class="num">NC &middot; SC &middot; VA</div><div class="label">Licensed States</div></div>
+    <div class="trust-item"><div class="num">3-Phase</div><div class="label">Compliance System</div></div>
+    <div class="trust-item"><div class="num">24/7</div><div class="label">Case Support</div></div>
+  </div>
+  <div class="disclosure">
+    <h4>Trust &amp; Disclosure</h4>
+    <p>MASPT provides administrative support, compliance coordination, and case monitoring services in connection with bail bond financing. All bail bonds are written by independently licensed bail bond agents under surety carrier authority. MASPT is not a surety insurer. Services are designed to support court compliance through communication, reminders, and structured engagement. No outcome is guaranteed, and all defendants remain responsible for meeting court obligations.</p>
+  </div>
+</section>
+
+<section id="bailback">
+  <div class="sl">Stability Program</div>
+  <div class="st">Bail Back Initiative&trade;</div>
+  <div class="sd">From release to stability. Structured, voluntary pathways designed to support accountability and productive engagement during the pretrial period.</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+    <div class="bail-back">
+      <h4>Workforce Engagement</h4>
+      <p>Participants may access structured opportunities aligned with their availability, designed to support income generation and consistent activity.</p>
+    </div>
+    <div class="bail-back">
+      <h4>Skill Development</h4>
+      <p>Hands-on exposure to real-world operational settings including administrative, logistical, and creative project environments.</p>
+    </div>
+    <div class="bail-back">
+      <h4>Structured Accountability</h4>
+      <p>Consistent engagement through communication, scheduling alignment, and activity-based participation reinforcing responsibility.</p>
+    </div>
+    <div class="bail-back">
+      <h4>Pathway Continuity</h4>
+      <p>Opportunities may extend beyond case completion based on participation, performance, and program availability.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="sl" style="color:var(--gold)">Work Release Program</div>
+    <h3 style="margin-bottom:8px">Structured Work Opportunities During Pretrial</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><h4 style="font-size:11px;color:var(--gold)">Flexible Structure</h4><p style="font-size:10px;color:var(--muted)">Assignments align with court schedules, legal obligations, and individual availability.</p></div>
+      <div><h4 style="font-size:11px;color:var(--gold)">Income Opportunity</h4><p style="font-size:10px;color:var(--muted)">Operations support, logistics coordination, and project-based work including media and production initiatives.</p></div>
+      <div><h4 style="font-size:11px;color:var(--gold)">Performance Progression</h4><p style="font-size:10px;color:var(--muted)">Consistent participants may access expanded responsibilities and longer-term placement options.</p></div>
+      <div><h4 style="font-size:11px;color:var(--gold)">Real-World Exposure</h4><p style="font-size:10px;color:var(--muted)">Reinforces reliability, communication, task completion standards, and structured work habits.</p></div>
+    </div>
+  </div>
+
+  <div class="disclosure">
+    <h4>Program Disclosure</h4>
+    <p>Participation in the Bail Back Initiative&trade; and Work Release Program is voluntary and not required as a condition of bail or release. All program activities operate independently of bail bond agreements. Participation is based on availability, eligibility, and program capacity. Compensation or opportunities provided through program participation are not connected to bail bond premiums or the cost of bail. Participation does not influence legal outcomes, court decisions, or case status.</p>
+  </div>
+</section>
+
+<section id="performance">
+  <div class="sl">Data-Driven Operations</div>
+  <div class="st">Performance &amp; Reporting</div>
+  <div class="sd">We maintain internal tracking across all active cases to support continuous improvement and strengthen coordination with agents, attorneys, and surety partners.</div>
+  <div class="grid2">
+    <div class="card">
+      <h4>Court Appearance Rates</h4>
+      <p>Internal tracking of appearance outcomes across all active cases to identify patterns and improve compliance support systems.</p>
+    </div>
+    <div class="card">
+      <h4>Case Completion Outcomes</h4>
+      <p>Documentation of resolution pathways and timeline metrics to support operational efficiency and partner reporting.</p>
+    </div>
+    <div class="card">
+      <h4>Communication Touchpoints</h4>
+      <p>Tracking of all structured communications, reminders, and engagement activities throughout the pretrial period.</p>
+    </div>
+    <div class="card">
+      <h4>Early Risk Indicators</h4>
+      <p>Monitoring of behavioral engagement signals that may indicate elevated risk, enabling proactive intervention.</p>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:16px;text-align:center;font-style:italic">This data supports continuous improvement and strengthens coordination with agents, attorneys, and surety partners.</p>
+</section>
+
+<section class="cta-section" id="cta">
+  <div class="sl">Get Started</div>
+  <h2>Ready to Begin the Process?</h2>
+  <p>Our team is available 24/7 to initiate intake and activate the compliance system.</p>
+  <div class="hero-btns">
+    <a href="tel:9194383718" class="btn btn-gold">Call Now: (919) 438-3718</a>
+    <a href="tel:9842514400" class="btn btn-outline">Alternate: (984) 251-4400</a>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>Mid-Atlantic Surety &amp; Public Trust &middot; 1730 Belvoir Highway &middot; Greenville, NC 27834</p>
+    <p>(919) 438-3718 &middot; info@affishaul.com &middot; midatlanticsuretypublictrust.com</p>
+    <p class="npi">Licensed NC &middot; SC &middot; VA &middot; All bonds written by independently licensed agents under surety carrier authority</p>
+  </div>
+</footer>
+
+</body>
+</html>
