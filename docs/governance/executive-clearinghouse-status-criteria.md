@@ -1,8 +1,9 @@
 # Executive Clearinghouse Status Criteria & Update Cadence
 
 **Document ID:** HHP-EC-STATUS-001  
-**Version:** v1.0  
+**Version:** v1.1  
 **Effective Date:** 2026-06-20  
+**Last Updated:** 2026-06-20  
 **Repository:** HIP-HOP-PEOPLES-DAO-LLC/hiphoppeoples-architecture  
 **Classification:** Internal governance / non-sensitive summary  
 **File Lane:** Architecture / Governance / Executive Clearinghouse  
@@ -293,7 +294,8 @@ Each review should include:
 7. Youth entries needing parent/guardian or safety review.
 8. Underwriting entries needing Stripe/ADP memo support.
 9. Governance entries needing CGC Resolution CIOS-BR-001 support.
-10. Revision log update.
+10. CIOS-REV-001 reporting deadline check.
+11. Revision log update.
 
 ### 9.3 Monthly Executive Sweep
 
@@ -309,6 +311,14 @@ Once per month, the Executive Clearinghouse should conduct a deeper sweep to ide
 - Items that should be archived
 - Items ready to move from Planning to Active
 - Items that must remain Pending Verification
+- GitHub contributors or file changes that should be reconciled against the Stripe & ADP Anchor Identification Memo where payment, payroll, or underwriting evidence is referenced
+- Entries requiring CGC Resolution CIOS-BR-001 cross-reference due to governance, bridge-finance, or independent oversight implications
+
+### 9.4 CIOS-REV-001 Sync
+
+The weekly and monthly review cadence must be adjusted if CIOS-REV-001 establishes a stricter reporting deadline.
+
+If a CIOS-REV-001 reporting deadline falls before the normal Friday closeout or Monday readiness review, the Executive Clearinghouse must complete revenue-related verification before that reporting deadline.
 
 ---
 
@@ -327,7 +337,26 @@ Once per month, the Executive Clearinghouse should conduct a deeper sweep to ide
 
 ---
 
-## 11. Executive Clearinghouse Decision Log Template
+## 11. Reviewer Access Rights
+
+GitHub access must follow least-privilege controls.
+
+| Role | GitHub Access | Permitted Action |
+|---|---|---|
+| Operations Lead | Admin or Maintainer | Approve protected-branch changes, merge governance updates, approve emergency holds. |
+| Register Steward | Write | Draft updates, open pull requests, maintain register revisions, respond to review comments. |
+| Finance / Revenue Reviewer | Read or Triage; Write only if assigned | Review financial evidence references; comment on PRs; avoid uploading restricted records. |
+| Workforce Reviewer | Read or Triage; Write only if assigned | Review workforce references and MAEG-WF-SOP-001 alignment. |
+| Clinical Firewall Reviewer | Read or Triage | Review language for clinical, Medicaid, PHI, and provider-control risk. |
+| Youth Safety Reviewer | Read or Triage | Review youth safety, parent/guardian, and minor-data language. |
+| Governance Reviewer | Read or Triage; Write only if assigned | Confirm CGC Resolution CIOS-BR-001 or related governance controls. |
+| Underwriting Reviewer | Read or Triage | Confirm lender-safe evidence status and Stripe/ADP memo references. |
+
+Admin access should be limited to the smallest practical number of people. Sensitive source records should not be uploaded to GitHub even by users with Admin access.
+
+---
+
+## 12. Executive Clearinghouse Decision Log Template
 
 Every status change should be logged using the following format:
 
@@ -337,7 +366,7 @@ Every status change should be logged using the following format:
 
 ---
 
-## 12. Pending Verification Queue Template
+## 13. Pending Verification Queue Template
 
 | Entry | Claim / Metric | Evidence Needed | Responsible Lane | Due Date | Status |
 |---|---|---|---|---|---|
@@ -351,7 +380,103 @@ Every status change should be logged using the following format:
 
 ---
 
-## 13. Prohibited Review Outcomes
+## 14. Governance Maintenance
+
+### 14.1 Version Control Protocol
+
+Updates to HHP-EC-STATUS-001 should follow a controlled GitHub workflow:
+
+1. Draft update on a branch or direct controlled edit only when authorized.
+2. Include a clear commit message stating the governance purpose.
+3. Require review by the Operations Lead or designated Governance Reviewer before merger into the primary branch when protected-branch rules are available.
+4. Update the version number and revision log for any substantive rule change.
+5. Do not combine governance-rule changes with unrelated program-history edits in the same commit unless the change is an emergency correction.
+
+Substantive rule changes include changes to status definitions, evidence standards, access rights, emergency override rules, archive retention, prohibited-use language, and required strategic cross-references.
+
+### 14.2 Emergency Override
+
+Emergency overrides are permitted only to prevent material harm, legal exposure, sensitive-data leakage, false external claims, safety issues, or institutional misrepresentation.
+
+Emergency override authority may be exercised by:
+
+- Operations Lead
+- Governance Reviewer acting under CGC Resolution CIOS-BR-001 authority
+- Authorized CGC role designated in a signed resolution
+
+Emergency override actions may include:
+
+- Moving an entry to Hold
+- Reverting an unsafe claim
+- Removing or redacting sensitive information
+- Blocking external use of an entry
+- Marking an entry Pending Verification
+- Freezing a status upgrade until evidence is reviewed
+
+Emergency overrides must be documented within 48 hours using the Decision Log or a governance note. No emergency override may be used to upgrade an unsupported claim to Active for external use.
+
+### 14.3 New Reviewer Onboarding
+
+New Executive Clearinghouse reviewers must be oriented to:
+
+- The Source Evidence Matrix
+- File-lane separation rules
+- Prohibited GitHub content
+- Pending Verification standards
+- Clinical firewall language
+- People’s Pass non-investment / non-employment controls
+- MAEG-WF-SOP-001 workforce placement gates
+- CIOS-REV-001 revenue and accrual standards
+- CGC Resolution CIOS-BR-001 governance authority
+- Stripe & ADP Anchor Identification Memo use limits
+
+New reviewers should not approve status upgrades until they understand which evidence belongs in GitHub and which evidence must remain in restricted folders.
+
+### 14.4 Technical Guardrails
+
+The repository should adopt automation where practical.
+
+Recommended GitHub guardrails:
+
+- Pull request checklist requiring relevant cross-references.
+- Labels such as `needs-CIOS-REV`, `needs-MAEG-WF-SOP`, `needs-CGC-resolution`, `needs-Stripe-ADP`, `clinical-firewall-review`, `youth-safety-review`, and `pending-verification`.
+- GitHub Actions or PR templates that flag missing required cross-reference language.
+- Branch protection for governance documents once repository operations mature.
+- CODEOWNERS or reviewer rules for files under `docs/governance/` and `docs/history/`.
+
+Automation should flag risk; it should not make final governance decisions without human review.
+
+### 14.5 Archive Retention
+
+Archived entries should remain in HHP-HIST-REG-001 or a linked archive for at least seven years unless legal counsel, governance authority, or a safety/privacy concern requires a different retention period.
+
+Permanent deletion should be rare and must require one of the following:
+
+- Duplicate record
+- Clear factual error
+- Sensitive-data exposure
+- Legal or privacy risk
+- Counsel or governance instruction
+- Migration to a controlled off-chain or restricted archive with a retained index entry
+
+If an item is moved off-chain or to restricted storage, the public/non-sensitive index should preserve:
+
+- Entry title
+- Archive date
+- Reason for archive
+- File lane
+- Reviewer
+- Restricted-location reference without exposing sensitive data
+
+### 14.6 Stripe/ADP Contributor & Evidence Reconciliation
+
+During the monthly sweep, any GitHub file or PR referencing payment, payroll, lender-safe evidence, W-2 hires, paid placements, or underwriting support must be reconciled against the Stripe & ADP Anchor Identification Memo or an equivalent approved evidence index.
+
+This reconciliation is not a payroll audit. It confirms that public or GitHub-facing claims do not exceed the evidence available in the proper payment/payroll/underwriting lane.
+
+---
+
+## 15. Prohibited Review Outcomes
 
 The Executive Clearinghouse must not:
 
@@ -364,10 +489,20 @@ The Executive Clearinghouse must not:
 - Treat provider-aligned work as HHHI independent billing without enrollment proof.
 - Treat bridge-loan targets as approved credit facilities.
 - Treat a completion-bond package as an issued bond.
+- Use emergency override authority to make an unsupported claim externally usable.
 
 ---
 
-## 14. Final Control Statement
+## 16. Revision Log
+
+| Version | Date | Change | Approved By |
+|---|---|---|---|
+| v1.0 | 2026-06-20 | Initial Executive Clearinghouse status criteria and cadence created. | Operations Lead |
+| v1.1 | 2026-06-20 | Added Governance Maintenance section covering version control, emergency override, access rights, onboarding, CIOS-REV sync, Stripe/ADP reconciliation, automation guardrails, and archive retention. | Operations Lead |
+
+---
+
+## 17. Final Control Statement
 
 The Executive Clearinghouse exists to convert ecosystem memory into reviewable institutional evidence without overstating status, exposing sensitive records, or mixing file lanes.
 
