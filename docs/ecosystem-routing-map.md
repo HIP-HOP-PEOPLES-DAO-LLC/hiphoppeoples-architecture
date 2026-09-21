@@ -65,6 +65,7 @@ To protect participants, maintain compliance, and preserve mission integrity, we
 - "Build Skills" (Krafty Academy)
 - "Create & Earn" (studio, vendors, talent pathways)
 - "Tech & Transparency" page linking to GitHub public repos and hiphoppeoples.dao governance portal
+- Planned **Hip Hop Peoples Universe** media/marketing engagement surface (Community ID, Greenville city missions) — see `docs/media-marketing-universe-overview.md` (Planning; not a clinical or payroll system)
 
 **Rule:** The website explains what we do and how to engage, **not** internal operations or case histories.
 
