@@ -1,9 +1,9 @@
 # Hip Hop Peoples / MAEG Ecosystem History Register
 
 **Document ID:** HHP-HIST-REG-001  
-**Version:** v1.2  
+**Version:** v1.3  
 **Created:** 2026-06-20  
-**Last Updated:** 2026-06-20  
+**Last Updated:** 2026-09-21  
 **Repository:** HIP-HOP-PEOPLES-DAO-LLC/hiphoppeoples-architecture  
 **Classification:** Non-sensitive institutional history register  
 **File Lane:** Architecture / History / Public-Reference Summary  
@@ -215,13 +215,46 @@ Krafty Academy serves as a workforce training pathway preparing participants for
 
 | Program / Activity | Lane | Status | Summary | Notes / Evidence Needed |
 |---|---|---|---|---|
+| Hip Hop Peoples Universe | Media / Marketing / Gamified Community | Planning | Public engagement surface for Greenville / Eastern NC: Community ID, city map missions, City XP, Studio / Workforce Academy / Community Square nodes, and Upland gateway framing. | Product requirements, privacy review, and live membership linkage before Active. Architecture summary: `docs/media-marketing-universe-overview.md`. Concept assets under `docs/assets/media-marketing/`. |
+| Hip Hop Peoples Community ID | Membership / Identity / Marketing | Planning | Physical + digital membership ID creative (People · Culture · Opportunity) with pathway icons and partner marks (T2F Media, MAEG). Example ID pattern only: `HHP-NC-PITT-######`. | Align with People’s Pass disclaimers; do not treat card roles as clinical credentials. Asset: `community-id-card-mockup.jpg`. |
+| Five Pathway Pillars Creative | Media / Marketing / Pathways | Planning | Public roster creative for Artist, Workforce Brand Visibility, CPSS, Legacy/Trades & Property, and Qualified Professional & Advocate pillars under “One ID. Many Pathways.” | Keep CPSS / advocate language firewall-separated from unlicensed clinical claims. Asset: `hip-hop-peoples-five-pillars.jpg`. |
 | 48 Stability | Media / Documentary / Workforce | Planning | Documentary/web-series concept documenting economic survival, entrepreneurship, community healing, workforce pathways, and stabilization infrastructure. | Tie to production file, budget, crew training, and NC Film readiness if applicable. |
-| Married to the Hustle | Media / Feature Film / Production | Planning | Narrative feature film project connected to MAEG production infrastructure, crew readiness, and production finance readiness. | Maintain separate production file, SPV documents, budget, payroll, insurance, and bond-readiness records. |
-| Nexus Stability App | Technology / Resource Navigation | Planning | Proposed platform connecting users to training opportunities, healthcare resources, economic mobility tools, and stabilization supports. | Needs product requirements, privacy review, and support-pathway mapping. |
+| Married to the Hustle | Media / Feature Film / Production | Planning | Eastern NC narrative feature presented by Mid-Atlantic Entertainment Group; casting flyer live for select open roles and background/extras; local talent encouraged (Pitt County / Greenville 252 corridor). | Maintain separate production file, SPV documents, budget, payroll, insurance, and bond-readiness records. Casting flyer: `married-to-the-hustle-casting-call.jpg`. Public CTA: midatlanticentertainmentgroup.com/film-production. |
+| HHHI Credential Verification Creative | Workforce / Credential Marketing | Planning | Public graphic for HHHI credential verification & pathway integration (lived-experience themes, peer support checklist, governance gateway). | Not a substitute for NCTracks, registry, or licensed-partner evidence. Asset: `hhhi-credential-verification-pathway.jpg`. |
+| Nexus Stability App | Technology / Resource Navigation | Planning | Proposed platform connecting users to training opportunities, healthcare resources, economic mobility tools, and stabilization supports. | Needs product requirements, privacy review, and support-pathway mapping. May converge with Universe mission routing — keep lanes explicit. |
 | Stevi-OS AI Architecture | AI / Workforce / Payments R&D | Planning | Research and development architecture for AI-powered job matching, resource routing, and possible same-day payment workflows. | Must separate concept architecture from live regulated financial services. |
 | Hip Hop Peoples Magazine | Media / Publishing / Historical Literacy | Planning | Digital and print publication focused on identity, cultural memory, community storytelling, and ecosystem documentation. | Maintain editorial archive and sponsor/distribution records. |
-| People’s Pass | Membership / Marketplace / Access | Active | Digital membership access product for community updates, member resources, early announcements, and participation opportunities. | Must not be presented as employment guarantee, investment, security, token, NFT, governance right, or cash-redeemable product. |
-| Freedom Notes | Utility / Recognition / Ledger Concept | Planning | Non-cash recognition or ledger concept associated with participation, access, or ecosystem history. | Must maintain not-investment / not-cash / not-security language. Any token/NFT treatment requires separate architecture and compliance review. |
+| People’s Pass | Membership / Marketplace / Access | Active | Digital membership access product for community updates, member resources, early announcements, and participation opportunities. | Must not be presented as employment guarantee, investment, security, token, NFT, governance right, or cash-redeemable product. Community ID creative should inherit these disclaimers. |
+| Freedom Notes | Utility / Recognition / Ledger Concept | Planning | Non-cash recognition or ledger concept associated with participation, access, or ecosystem history. | Must maintain not-investment / not-cash / not-security language. Distinct from Universe City XP engagement mechanics. Any token/NFT treatment requires separate architecture and compliance review. |
+| Upland Partnership Framing | Technology / Virtual City / Marketing | Planning | Creative pairing of HHP Universe with Upland (“Play. Earn. Own.” / real cities · virtual land · real skills). | Skills and play framing only; no securities or real-property investment claims without separate review. |
+
+### 6.1 Hip Hop Peoples Universe — Initial Entry
+
+**Status:** Planning  
+**Lane:** Media / Marketing / Gamified Community Engagement  
+**Sensitivity Level:** Non-sensitive marketing/concept summary only; resident profiles and engagement telemetry excluded from GitHub when they exist.  
+
+**Institutional Summary:**  
+Hip Hop Peoples Universe is the planned media and marketing engagement layer that presents Eastern NC community identity through a Community ID, a Greenville city map experience (missions, City XP, rewards), pathway pillars, and handoffs into Create & Earn / Build Skills / Get Support — without replacing HHHI credential controls or production finance files.
+
+**Open Items / Source Evidence Required:**
+
+- Product requirements and privacy review before storing resident profiles or mission progress.
+- Explicit mapping from Universe CTAs to People’s Pass, casting intake, Krafty Academy, and HHHI Get Support flows.
+- Separation of City XP (engagement) from Freedom Notes™ (governance recognition) and from payroll.
+- Partner agreement file for any live Upland integration beyond marketing creative.
+- Architecture overview: `docs/media-marketing-universe-overview.md`.
+
+**Control Notes:**
+
+- Marketing creative must not imply clinical therapy, Medicaid enrollment, guaranteed casting, or guaranteed employment.
+- Casting for *Married to the Hustle* remains in the MAEG production lane.
+- HHHI credential verification graphics remain workforce/credential marketing adjacent to Universe — not in-app clinical gates.
+
+**Reference / Evidence Links To Attach:**
+
+- `docs/media-marketing-universe-overview.md`
+- `docs/assets/media-marketing/` concept set (casting, ID, pillars, city UI, HHHI graphic)
 
 ---
 
@@ -445,6 +478,10 @@ The following should be verified and attached in future commits or linked record
 1. Website page references for People’s Pass, Talent Network, Create & Earn, and Get Support.
 2. Notion links for MAEG-WF-SOP-001 and the Participant Tracking Dashboard.
 3. Production files for Married to the Hustle and 48 Stability.
+3a. Casting intake archive and call-sheet linkage for Married to the Hustle open-role flyer (asset captured under `docs/assets/media-marketing/married-to-the-hustle-casting-call.jpg`).
+3b. Product requirements / privacy review for Hip Hop Peoples Universe before any Active resident profile or City XP ledger.
+3c. People’s Pass disclaimer alignment for Community ID issuance.
+3d. Partner agreement or scope memo for Upland gateway framing if integration moves beyond marketing creative.
 4. Flyers or registration records for Under The Lights Flag Football.
 5. Flyers, photos, or event records for Hip Hop Wellness Fair and Sip & Paint Healing Events.
 6. Youth safety and parent/guardian intake procedure for CareBear Playhouse, Youth Pass, swim safety, and youth enrichment activities.
@@ -488,6 +525,7 @@ This register must not be used as:
 | v1.0 | 2026-06-20 | Initial ecosystem history register created. | Operations Lead |
 | v1.1 | 2026-06-20 | Expanded core program and economic lane entries; added reported metrics, open items, strategic controls, and verification list. | Operations Lead |
 | v1.2 | 2026-06-20 | Normalized status markers to Active, Planning, Pending Verification, and Archived; added status-upgrade rule and source-evidence requirements. | Operations Lead |
+| v1.3 | 2026-09-21 | Added Hip Hop Peoples Universe media/marketing layer, Community ID, five-pillar creative, Married to the Hustle casting flyer evidence, HHHI credential graphic, and Upland framing; linked HHP-MEDIA-UNIV-001. | Operations Lead |
 
 ---
 

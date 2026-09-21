@@ -22,6 +22,8 @@ It exists so that participants, partners, funders, and auditors can understand *
 | [`docs/freedom-notes-overview.md`](docs/freedom-notes-overview.md) | What Freedom Notes™ are, what they are not, and how they work |
 | [`docs/rd-compliance-summary.md`](docs/rd-compliance-summary.md) | How we maintain R&D tax credit compliance while avoiding arts/humanities exclusions |
 | [`docs/ccos-overview.md`](docs/ccos-overview.md) | Cultural Compliance Operating System (CCOS) architecture overview |
+| [`docs/media-marketing-universe-overview.md`](docs/media-marketing-universe-overview.md) | Hip Hop Peoples Universe media & marketing layer (Community ID, city missions, casting, pathways) |
+| [`docs/history/ecosystem-history-register.md`](docs/history/ecosystem-history-register.md) | Controlled history register of programs, media, workforce, and technology initiatives |
 
 ---
 

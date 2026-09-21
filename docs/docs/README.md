@@ -10,6 +10,9 @@ This folder contains public-facing documentation that explains how the Hip-Hop P
 - **freedom-notes-overview.md**  
   What Freedom Notes™ are, what they are not, and how they work
 
+- **media-marketing-universe-overview.md** (repo root `docs/`)  
+  Hip Hop Peoples Universe media & marketing layer — Community ID, Greenville city experience, casting, and pathway creative
+
 ## Important Note
 
 These documents describe structure and rules, not records.  
