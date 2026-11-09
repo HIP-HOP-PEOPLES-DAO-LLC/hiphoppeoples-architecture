@@ -1,0 +1,18 @@
+name: Emerald City member portal static QA
+on:
+  pull_request:
+    paths:
+      - 'emerald-city-member-hub/**'
+      - '.github/workflows/emerald-city-member-hub.yml'
+  workflow_dispatch:
+jobs:
+  source-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node emerald-city-member-hub/test.mjs
