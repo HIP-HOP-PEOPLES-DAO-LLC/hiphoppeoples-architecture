@@ -1,0 +1,25 @@
+name: Holiday Quest DLQ alert — static QA
+on:
+  push:
+    branches:
+      - feature/holiday-quest-dlq-alert-20261109
+    paths:
+      - 'holiday-quest-intake/**'
+      - '.github/workflows/holiday-quest-dlq-alert.yml'
+  pull_request:
+    paths:
+      - 'holiday-quest-intake/**'
+      - '.github/workflows/holiday-quest-dlq-alert.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  safety-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node holiday-quest-intake/test-alert.mjs
+      - run: node holiday-quest-intake/test-normalize.mjs
