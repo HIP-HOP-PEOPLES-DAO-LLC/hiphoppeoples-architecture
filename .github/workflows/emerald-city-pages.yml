@@ -6,6 +6,10 @@ on:
     paths:
       - 'emerald-city-member-hub/**'
       - '.github/workflows/emerald-city-pages.yml'
+  pull_request:
+    paths:
+      - 'emerald-city-member-hub/**'
+      - '.github/workflows/emerald-city-pages.yml'
   workflow_dispatch:
 permissions:
   contents: read
