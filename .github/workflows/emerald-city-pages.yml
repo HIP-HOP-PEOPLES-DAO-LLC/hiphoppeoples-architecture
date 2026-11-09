@@ -1,0 +1,41 @@
+name: Emerald City Member Hub — GitHub Pages launch candidate
+on:
+  push:
+    branches:
+      - feature/emerald-city-member-hub-20261109
+    paths:
+      - 'emerald-city-member-hub/**'
+      - '.github/workflows/emerald-city-pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: emerald-city-pages
+  cancel-in-progress: false
+jobs:
+  pages:
+    name: Publish isolated Emerald City portal
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check portal source
+        run: node emerald-city-member-hub/test.mjs
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload only member hub static files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: emerald-city-member-hub
+      - name: Deploy member hub
+        id: deployment
+        uses: actions/deploy-pages@v4
