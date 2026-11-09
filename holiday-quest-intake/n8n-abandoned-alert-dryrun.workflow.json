@@ -1,0 +1,108 @@
+{
+  "name": "DRAFT — HHP Holiday Quest DLQ abandoned alert (dry run only)",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "manual-qa",
+      "name": "Manual QA Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        240
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "fixture",
+      "name": "Synthetic Abandoned DLQ Fixture",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        450,
+        240
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{json:{dlq_id:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',event_id:'QA-SYNTHETIC-NOT-PROD',status:'abandoned',target_system:'HubSpot',error_code:'SYNC_TEST_FAILURE',retry_count:5,max_retries:5,alert_claim_token:'12345678-1234-4123-8123-123456789abc',alert_sent_at:null}}];"
+      }
+    },
+    {
+      "id": "alert",
+      "name": "Build Privacy-Safe Staff Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        685,
+        240
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "/** n8n Code node: Run Once for All Items. No emails sent here. */\nconst rows = $input.all();\nconst permitted = new Set(['GHL','GoHighLevel','HubSpot','Airtable','Gmail','n8n','Supabase']);\nconst outputs=[];const seen=new Set();\nfor (const item of rows) {\n  const x=item.json??{};\n  if(x.status!=='abandoned'||x.alert_sent_at||!x.alert_claim_token)continue;\n  if(!Number.isInteger(Number(x.retry_count))||Number(x.retry_count)<Number(x.max_retries??5))continue;\n  const id=String(x.dlq_id??'');\n  if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(id))continue;\n  const target=String(x.target_system??'Unknown');\n  const safeTarget=permitted.has(target)?target:'Unknown system';\n  const key=id+':'+safeTarget;\n  if(seen.has(key))continue; seen.add(key);\n  const code=/^[A-Z0-9_\\-]{1,50}$/.test(String(x.error_code??''))?String(x.error_code):'SYNC_FAILED';\n  const subject=`[HHP ACTION REQUIRED] Holiday Quest sync abandoned · ${safeTarget} · ${id.slice(0,8)}`;\n  const body=[\n    'A Holiday Quest system-to-system sync has reached its retry limit.','',\n    `DLQ reference: ${id}`,`Target system: ${safeTarget}`,`Error code: ${code}`,\n    `Retry count: ${Number(x.retry_count)}`,\n    'Status: abandoned — manual operator review required',\n    'No customer has been contacted and no new billing action is authorized by this alert.','',\n    'Operator action: open the restricted DLQ record; inspect the destination response and source event;',\n    'verify whether the upstream event has already synced; correct the underlying issue;',\n    'then authorize an idempotent replay or mark resolved with human review.','',\n    'This email intentionally excludes personal data and raw error messages.'\n  ].join('\\n');\n  outputs.push({json:{dlq_id:id,alert_claim_token:String(x.alert_claim_token),idempotency_key:key,subject,body,staff_recipient:'affishaulworldwide@gmail.com'}});\n}\nreturn outputs;"
+      }
+    },
+    {
+      "id": "email",
+      "name": "DISABLED Gmail Staff Alert — configure after review",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        930,
+        240
+      ],
+      "disabled": true,
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{$json.staff_recipient}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "text",
+        "message": "={{$json.body}}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Manual QA Trigger": {
+      "main": [
+        [
+          {
+            "node": "Synthetic Abandoned DLQ Fixture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthetic Abandoned DLQ Fixture": {
+      "main": [
+        [
+          {
+            "node": "Build Privacy-Safe Staff Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Privacy-Safe Staff Alert": {
+      "main": [
+        [
+          {
+            "node": "DISABLED Gmail Staff Alert — configure after review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "tags": [],
+  "meta": {
+    "notice": "TEST-ONLY: Replace fixture with private authorized DB claim source; activate Gmail only after credentials and human review; add successful-send ACK SQL."
+  }
+}
