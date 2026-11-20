@@ -36,7 +36,7 @@
 | Work performed | Repo audit; package scaffold; conversation + game layers; candidate SQL; local tests. |
 | Measured outcome | Audit recorded; package created; tests executed locally (see E3). Production DB unchanged. |
 | Failures | Live schema re-verification impossible (no DB credentials). Portal / dedicated STEVIE ChatKit service repos not located under exact names. |
-| Commit hash | See branch tip after Sprint 1 commit (`git rev-parse HEAD` on `cursor/stevie-web-router-001-sprint1-1812`). |
+| Commit hash | `8e799f1d6f8555f901b666c9ede1a6cedc62e330` |
 | Local test summary (E3 shared) | 19/19 PASS via `npm run test:report` on 2026-11-20; artifact `artifacts/test-runs/stevie-web-kit-sprint1.txt`. |
 
 ---
@@ -53,7 +53,7 @@
 | Work performed | `src/game/xp-engine.js`; migration `20261120_stevie_web_router_001_sprint1.sql` (+ down). |
 | Measured outcome | Local tests: replay, concurrent idempotency, unauthorized write, append-only, cross-tenant rejection — **PASS** (see test artifact). |
 | Failures | SQL not executed against Supabase (credentials unavailable / production apply forbidden). |
-| Commit hash | See branch tip after Sprint 1 commit. |
+| Commit hash | `8e799f1d6f8555f901b666c9ede1a6cedc62e330` |
 | Local test summary | XP suite PASS (replay, concurrent idempotency, unauthorized write, append-only, cross-tenant, cash-redeemable refusal). |
 
 ---
