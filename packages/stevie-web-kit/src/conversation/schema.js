@@ -26,12 +26,15 @@ export function validateMerchantIntake(payload, manifest) {
   const normalized = {};
   for (const field of manifest.fields) {
     const raw = payload[field.id];
-    if ((raw === undefined || raw === null || raw === '') && field.required) {
-      errors.push(`missing required field: ${field.id}`);
+    if (raw === undefined || raw === null) {
+      if (field.required) errors.push(`missing required field: ${field.id}`);
       continue;
     }
-    if (raw === undefined || raw === null || raw === '') continue;
     const value = String(raw).trim();
+    if (value === '') {
+      if (field.required) errors.push(`missing required field: ${field.id}`);
+      continue;
+    }
     if (field.max && value.length > field.max) {
       errors.push(`${field.id} exceeds max length ${field.max}`);
       continue;

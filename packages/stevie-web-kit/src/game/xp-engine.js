@@ -11,8 +11,10 @@ export class XpEngine {
     this.ledger = [];
     /** @type {Map<string, number>} playerId -> balance */
     this.balances = new Map();
-    /** @type {Set<string>} idempotency keys */
+    /** @type {Set<string>} request idempotency keys */
     this.seen = new Set();
+    /** @type {Set<string>} completion keys: tenant:player:quest */
+    this.completions = new Set();
     this._appendOnly = true;
   }
 
@@ -29,6 +31,7 @@ export class XpEngine {
       xpReward: quest.xpReward,
       tenantId: quest.tenantId || 'global',
       active: quest.active !== false,
+      storeCode: quest.storeCode || `VERIFY-${quest.questId}`,
     });
     return this.quests.get(quest.questId);
   }
@@ -64,15 +67,29 @@ export class XpEngine {
   }
 
   /**
-   * Idempotent award. Concurrent duplicate keys collapse to one ledger row.
+   * Idempotent award. Completion uniqueness is (tenant, player, quest) and cannot
+   * be bypassed by rotating a caller-supplied idempotency key.
    */
   awardXp({ playerId, questId, tenantId, proof, idempotencyKey }) {
     const verified = this.verifyCompletion({ playerId, questId, tenantId, proof });
     if (!verified.ok) return verified;
 
-    const key = idempotencyKey || `${tenantId}:${playerId}:${questId}`;
-    if (this.seen.has(key)) {
-      const prior = this.ledger.find((e) => e.idempotencyKey === key);
+    const completionKey = `${tenantId}:${playerId}:${questId}`;
+    const requestKey = idempotencyKey || completionKey;
+
+    const priorByCompletion = this.ledger.find((e) => e.completionKey === completionKey);
+    if (priorByCompletion || this.completions.has(completionKey)) {
+      return {
+        ok: true,
+        duplicate: true,
+        awarded: 0,
+        balance: this.balances.get(playerId) || 0,
+        event: priorByCompletion || this.ledger.find((e) => e.idempotencyKey === requestKey),
+      };
+    }
+
+    if (this.seen.has(requestKey)) {
+      const prior = this.ledger.find((e) => e.idempotencyKey === requestKey);
       return {
         ok: true,
         duplicate: true,
@@ -89,12 +106,14 @@ export class XpEngine {
       questId,
       tenantId,
       amount,
-      idempotencyKey: key,
+      idempotencyKey: requestKey,
+      completionKey,
       createdAt: new Date().toISOString(),
       source: 'server_verified_quest',
     });
 
-    this.seen.add(key);
+    this.seen.add(requestKey);
+    this.completions.add(completionKey);
     this.ledger.push(event);
     this.balances.set(playerId, (this.balances.get(playerId) || 0) + amount);
     return {

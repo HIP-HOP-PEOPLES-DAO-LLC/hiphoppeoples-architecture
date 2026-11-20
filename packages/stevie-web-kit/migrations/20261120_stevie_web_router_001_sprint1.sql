@@ -10,7 +10,8 @@ BEGIN;
 
 CREATE SCHEMA IF NOT EXISTS emerald;
 REVOKE ALL ON SCHEMA emerald FROM PUBLIC;
--- anon/authenticated get usage only through tightly scoped RPCs below.
+-- Callers need schema USAGE to resolve emerald.award_xp; table privileges stay revoked.
+GRANT USAGE ON SCHEMA emerald TO authenticated;
 
 CREATE TABLE IF NOT EXISTS emerald.quest_definitions (
   quest_id text PRIMARY KEY,
@@ -35,7 +36,9 @@ CREATE TABLE IF NOT EXISTS emerald.xp_events (
   idempotency_key text NOT NULL,
   source text NOT NULL DEFAULT 'server_verified_quest'
     CHECK (source = 'server_verified_quest'),
-  CONSTRAINT xp_events_idempotency UNIQUE (idempotency_key)
+  CONSTRAINT xp_events_idempotency UNIQUE (idempotency_key),
+  -- Completion uniqueness is independent of caller-supplied idempotency keys.
+  CONSTRAINT xp_events_one_completion_per_player_quest UNIQUE (tenant_id, player_id, quest_id)
 );
 
 -- No UPDATE/DELETE grants will be issued to clients; append-only by privilege design.
@@ -106,6 +109,23 @@ BEGIN
   -- Amount comes ONLY from quest definition — never from client arguments.
   v_key := coalesce(nullif(trim(p_idempotency_key), ''), p_tenant_id || ':' || p_player_id::text || ':' || p_quest_id);
 
+  -- Prefer completion uniqueness over rotating request keys.
+  SELECT * INTO v_existing
+  FROM emerald.xp_events e
+  WHERE e.tenant_id = p_tenant_id
+    AND e.player_id = p_player_id
+    AND e.quest_id = p_quest_id;
+  IF FOUND THEN
+    SELECT balance INTO v_balance FROM emerald.xp_balances WHERE player_id = p_player_id;
+    RETURN jsonb_build_object(
+      'ok', true,
+      'duplicate', true,
+      'awarded', 0,
+      'balance', coalesce(v_balance, 0),
+      'event_id', v_existing.event_id
+    );
+  END IF;
+
   SELECT * INTO v_existing FROM emerald.xp_events e WHERE e.idempotency_key = v_key;
   IF FOUND THEN
     SELECT balance INTO v_balance FROM emerald.xp_balances WHERE player_id = p_player_id;
@@ -137,8 +157,13 @@ BEGIN
     'event_id', v_event_id
   );
 EXCEPTION WHEN unique_violation THEN
-  -- Concurrent award with same idempotency key.
-  SELECT * INTO v_existing FROM emerald.xp_events e WHERE e.idempotency_key = v_key;
+  -- Concurrent award with same completion or idempotency key.
+  SELECT * INTO v_existing
+  FROM emerald.xp_events e
+  WHERE (e.tenant_id = p_tenant_id AND e.player_id = p_player_id AND e.quest_id = p_quest_id)
+     OR e.idempotency_key = v_key
+  ORDER BY e.created_at ASC
+  LIMIT 1;
   SELECT balance INTO v_balance FROM emerald.xp_balances WHERE player_id = p_player_id;
   RETURN jsonb_build_object(
     'ok', true,

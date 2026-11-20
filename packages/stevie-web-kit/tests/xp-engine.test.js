@@ -119,3 +119,55 @@ test('quest definition refuses cash-redeemable rewards', () => {
     }),
   );
 });
+
+test('rotating idempotency keys cannot remint the same quest completion', () => {
+  const xp = primed();
+  const proof = { kind: 'store_code', code: 'VERIFY-hq-stop-1' };
+  const first = xp.awardXp({
+    playerId: 'player-1',
+    questId: 'hq-stop-1',
+    tenantId: 'tenant-a',
+    proof,
+    idempotencyKey: 'key-a',
+  });
+  const second = xp.awardXp({
+    playerId: 'player-1',
+    questId: 'hq-stop-1',
+    tenantId: 'tenant-a',
+    proof,
+    idempotencyKey: 'key-b',
+  });
+  assert.equal(first.ok, true);
+  assert.equal(first.duplicate, false);
+  assert.equal(second.ok, true);
+  assert.equal(second.duplicate, true);
+  assert.equal(second.awarded, 0);
+  assert.equal(xp.getBalance('player-1'), 50);
+  assert.equal(xp.getLedger().length, 1);
+});
+
+test('configured storeCode is preserved and verified', () => {
+  const xp = new XpEngine();
+  xp.defineQuest({
+    questId: 'q',
+    xpReward: 10,
+    tenantId: 'tenant-a',
+    storeCode: 'SECRET-123',
+  });
+  const bad = xp.awardXp({
+    playerId: 'player-1',
+    questId: 'q',
+    tenantId: 'tenant-a',
+    proof: { kind: 'store_code', code: 'VERIFY-q' },
+  });
+  const good = xp.awardXp({
+    playerId: 'player-1',
+    questId: 'q',
+    tenantId: 'tenant-a',
+    proof: { kind: 'store_code', code: 'SECRET-123' },
+  });
+  assert.equal(bad.ok, false);
+  assert.equal(bad.code, 'PROOF_FAILED');
+  assert.equal(good.ok, true);
+  assert.equal(good.awarded, 10);
+});

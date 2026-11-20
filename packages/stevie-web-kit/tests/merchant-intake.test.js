@@ -95,6 +95,19 @@ test('schema rejects client-supplied XP fields', () => {
   assert.equal(bad.code, 'SCHEMA_INVALID');
 });
 
+test('schema rejects whitespace-only required fields', () => {
+  const { orchestrator } = freshStack();
+  const sessionId = gatedSession(orchestrator);
+  const bad = orchestrator.submitIntake(sessionId, {
+    ...sampleMerchant(11),
+    legal_name: '   ',
+    address: '\t',
+  });
+  assert.equal(bad.ok, false);
+  assert.equal(bad.code, 'SCHEMA_INVALID');
+  assert.ok(bad.errors.some((e) => e.includes('legal_name')));
+});
+
 test('ChatKit client config refuses service_role material', () => {
   assert.throws(() => createChatKitClientConfig({ publishableKey: 'service_role_xxx', sessionId: 's' }));
   const cfg = createChatKitClientConfig({ publishableKey: 'sb_publishable_test', sessionId: 's' });

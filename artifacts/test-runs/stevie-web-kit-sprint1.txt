@@ -1,30 +1,33 @@
 {"evidence":"infra_unavailable","production_migration_apply":"NOT_RUN","reason":"No SUPABASE_SERVICE_ROLE_KEY or DATABASE_URL in workspace; directive forbids production apply."}
 {"evidence":"infra_unavailable","live_model_intake":"NOT_RUN","reason":"No OPENAI_API_KEY; Sprint 1 uses deterministic orchestrator + FAQ router."}
-✔ inventory: production Supabase migration apply is unavailable (expected) (1.062354ms)
-✔ inventory: live ChatKit/Agents SDK model calls unavailable (expected) (0.227848ms)
-✔ candidate migration files exist and are not auto-applied (0.286449ms)
+✔ inventory: production Supabase migration apply is unavailable (expected) (0.995595ms)
+✔ inventory: live ChatKit/Agents SDK model calls unavailable (expected) (0.218368ms)
+✔ candidate migration files exist and are not auto-applied (0.265956ms)
 {"evidence":"intake_token_cost","turns":2,"promptTokens":120,"completionTokens":100,"estimatedCostUsd":0.00044}
-✔ ten synthetic merchant intakes enter human approval queue without transmission (4.507812ms)
-✔ duplicate intake submission is idempotent per tenant fingerprint (0.266697ms)
-✔ cross-tenant isolation: tenants cannot list each other queues (1.349233ms)
-✔ consent rejection blocks chat and submit (0.211904ms)
-✔ Seller-of-Record acknowledgment rejection blocks gate capture (0.117324ms)
-✔ static FAQ routing is deterministic (0.285446ms)
-✔ schema rejects client-supplied XP fields (0.121173ms)
-✔ ChatKit client config refuses service_role material (0.232613ms)
-✔ token consumption and estimated cost recorded per completed intake (0.89315ms)
-✔ XP replay / idempotent award collapses duplicates (5.517208ms)
-✔ concurrent-award simulation with same idempotency key yields one ledger event (0.575188ms)
-✔ unauthorized direct database-write attempt is rejected (0.188126ms)
-✔ append-only ledger enforcement blocks mutation helper (0.127271ms)
-✔ client-supplied XP amount is rejected (0.189524ms)
-✔ cross-tenant quest award is rejected (0.111385ms)
-✔ quest definition refuses cash-redeemable rewards (0.271741ms)
-ℹ tests 19
+✔ ten synthetic merchant intakes enter human approval queue without transmission (3.795882ms)
+✔ duplicate intake submission is idempotent per tenant fingerprint (0.279158ms)
+✔ cross-tenant isolation: tenants cannot list each other queues (0.289424ms)
+✔ consent rejection blocks chat and submit (0.156505ms)
+✔ Seller-of-Record acknowledgment rejection blocks gate capture (0.100224ms)
+✔ static FAQ routing is deterministic (0.326927ms)
+✔ schema rejects client-supplied XP fields (0.121398ms)
+✔ schema rejects whitespace-only required fields (0.157019ms)
+✔ ChatKit client config refuses service_role material (0.43392ms)
+✔ token consumption and estimated cost recorded per completed intake (0.894392ms)
+✔ XP replay / idempotent award collapses duplicates (4.064403ms)
+✔ concurrent-award simulation with same idempotency key yields one ledger event (0.490623ms)
+✔ unauthorized direct database-write attempt is rejected (0.126844ms)
+✔ append-only ledger enforcement blocks mutation helper (0.113933ms)
+✔ client-supplied XP amount is rejected (0.193546ms)
+✔ cross-tenant quest award is rejected (0.10953ms)
+✔ quest definition refuses cash-redeemable rewards (0.253499ms)
+✔ rotating idempotency keys cannot remint the same quest completion (0.147095ms)
+✔ configured storeCode is preserved and verified (0.321478ms)
+ℹ tests 22
 ℹ suites 0
-ℹ pass 19
+ℹ pass 22
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 81.200446
+ℹ duration_ms 67.877698
