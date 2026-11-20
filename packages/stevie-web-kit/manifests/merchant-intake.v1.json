@@ -1,0 +1,54 @@
+{
+  "manifest_id": "merchant-intake.v1",
+  "version": "1.0.0",
+  "business_component": "BC-01-STEVIE",
+  "storefront_brand": "Blockchain Mini-Mart",
+  "technology_credit": "Powered by Stevie AI",
+  "jotform_fallback": {
+    "form_id": "263012280194045",
+    "url": "https://form.jotform.com/263012280194045",
+    "note": "Existing partner inquiry fallback on /partner. Do not replace without human approval."
+  },
+  "gates": {
+    "require_consent": true,
+    "require_seller_of_record_ack": true,
+    "max_turns_per_session": 24,
+    "max_tokens_per_session": 12000,
+    "human_approval_required_before_transmit": true
+  },
+  "fields": [
+    { "id": "legal_name", "type": "string", "required": true, "max": 150 },
+    { "id": "storefront_name", "type": "string", "required": true, "max": 120 },
+    { "id": "address", "type": "string", "required": true, "max": 300 },
+    { "id": "requested_slug", "type": "slug", "required": true, "max": 50 },
+    { "id": "contact_name", "type": "string", "required": true, "max": 120 },
+    { "id": "contact_email", "type": "email", "required": true, "max": 220 },
+    { "id": "signer_email", "type": "email", "required": true, "max": 220 },
+    { "id": "mission_type", "type": "enum", "required": true, "values": ["checkin", "trivia", "photo"] },
+    { "id": "mission_prompt", "type": "string", "required": true, "max": 300 },
+    { "id": "offer_text", "type": "string", "required": true, "max": 200 },
+    { "id": "package", "type": "string", "required": true, "values": ["holiday_quest_350"] }
+  ],
+  "static_faq": [
+    {
+      "id": "faq-xp-cash",
+      "patterns": ["cash", "redeem", "sell xp", "transfer xp", "crypto"],
+      "answer": "Emerald City XP is a non-cash game score. It is not purchasable, transferable, or redeemable for money."
+    },
+    {
+      "id": "faq-approval",
+      "patterns": ["approved", "live", "when do i go live", "automatic"],
+      "answer": "Submissions enter a human approval queue. Nothing goes live, charges a card, or transmits a merchant application without staff review."
+    },
+    {
+      "id": "faq-brand",
+      "patterns": ["blockchain mini", "mini-mart", "storefront brand"],
+      "answer": "The public storefront brand is Blockchain Mini-Mart. Conversational intake is Powered by Stevie AI."
+    },
+    {
+      "id": "faq-jotform",
+      "patterns": ["jotform", "fallback form", "partner form"],
+      "answer": "If conversational intake is unavailable, use the existing Jotform partner inquiry fallback on the partner page."
+    }
+  ]
+}
