@@ -1,0 +1,19 @@
+{
+  "name": "@hhp/stevie-web-kit",
+  "version": "0.1.0-sprint1",
+  "private": true,
+  "description": "Reusable Stevie Web Kit — merchant intake conversation layer + deterministic Emerald City XP engine (Sprint 1 vertical slice).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:report": "node --test --test-reporter=spec tests/*.test.js 2>&1 | tee ../../artifacts/test-runs/stevie-web-kit-sprint1.txt"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./conversation": "./src/conversation/index.js",
+    "./game": "./src/game/index.js"
+  }
+}
